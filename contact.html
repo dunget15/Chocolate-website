@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Private Chocolate</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- CALL MODAL -->
+  <div class="modal-overlay" id="callModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeCallModal()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M14 2L2 14" stroke="var(--dark)" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </button>
+      <div id="callFormInner">
+        <p class="eyebrow">REQUEST A CALL</p>
+        <h3 style="font-family:var(--serif);font-size:1.6rem;letter-spacing:-0.01em;margin-bottom:4px;">Let's talk.</h3>
+        <p class="body-text mb-8">Leave your details and a convenient time and we'll call you.</p>
+        <form id="callForm" style="display:flex;flex-direction:column;gap:20px;">
+          <div class="field"><label>Name <span class="req">*</span></label><input type="text" placeholder="Your name" required></div>
+          <div class="field"><label>Company <span class="req">*</span></label><input type="text" placeholder="Company name" required></div>
+          <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" placeholder="+30 XXX XXX XXXX" required></div>
+          <div class="field"><label>Preferred time to call</label><input type="text" placeholder="e.g. Weekdays 10:00–13:00"></div>
+          <div class="field"><label>What would you like to discuss?</label><textarea placeholder="A few words about what you'd like to cover."></textarea></div>
+          <button type="submit" class="btn btn-dark" style="margin-top:8px;">REQUEST A CALL</button>
+        </form>
+      </div>
+      <div id="callSuccess" style="display:none;text-align:center;padding:32px 0;">
+        <p class="eyebrow">REQUEST RECEIVED</p>
+        <h3 style="font-family:var(--serif);font-size:1.6rem;letter-spacing:-0.01em;margin-bottom:12px;">We'll be in touch.</h3>
+        <p class="body-text">Thank you for your request. Our team will contact you to arrange a call.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><span class="logo-private">Private</span><span class="logo-chocolate">CHOCOLATE</span></a>
+      <nav class="nav-desktop">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="private-label.html" class="nav-link">PRIVATE LABEL</a>
+        <a href="our-brand.html" class="nav-link">OUR BRAND</a>
+        <a href="contact.html" class="nav-link">CONTACT</a>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switcher"><button class="lang-btn active" data-lang="GR">GR<span class="lang-sep">|</span></button><button class="lang-btn" data-lang="EN">EN</button></div>
+        <a href="contact.html" class="btn btn-gold" style="padding:10px 20px;">REQUEST A QUOTE</a>
+      </div>
+      <div class="mobile-controls">
+        <div class="mobile-lang"><button class="lang-btn active" data-lang="GR">GR</button><button class="lang-btn" data-lang="EN">EN</button></div>
+        <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu">
+      <a href="index.html">HOME</a><a href="private-label.html">PRIVATE LABEL</a><a href="our-brand.html">OUR BRAND</a><a href="contact.html">CONTACT</a>
+      <a href="contact.html" class="btn btn-gold" style="text-align:center;margin-top:8px;">REQUEST A QUOTE</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01. HERO -->
+    <section class="contact-hero">
+      <div class="container">
+        <div style="max-width:672px;">
+          <p class="eyebrow">LET'S TALK</p>
+          <h1 style="font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.08;letter-spacing:-0.025em;color:var(--text-light);margin-bottom:24px;">Let's discuss your<br><span class="italic text-gold">chocolate requirements.</span></h1>
+          <p style="color:rgba(245,240,232,0.65);font-size:1rem;font-weight:300;line-height:1.65;max-width:500px;margin-bottom:40px;">Whether you are looking for a private label solution or ready-to-market chocolate products, tell us what you need and our team will get back to you with the most suitable options.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button onclick="scrollToForm()" class="btn btn-gold-solid">REQUEST A QUOTE →</button>
+            <button onclick="openCallModal()" class="btn btn-ghost">CONTACT US DIRECTLY</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 + 03. CONTACT INFO + FORM -->
+    <section id="formSection" class="section-ivory">
+      <div class="container">
+        <div class="contact-layout">
+          <!-- LEFT: CONTACT INFO -->
+          <div class="contact-sidebar">
+            <h2 style="font-family:var(--serif);font-size:1.5rem;letter-spacing:-0.015em;margin-bottom:8px;">Prefer to speak directly?</h2>
+            <p class="body-text mb-8">You can also contact us directly.</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <a href="mailto:info@privatechocolate.com" class="contact-card">
+                <div class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M2 6l7 5 7-5"/></svg></div>
+                <div><p class="label">EMAIL</p><p class="value">info@privatechocolate.com</p></div>
+              </a>
+              <a href="tel:+30000000000" class="contact-card">
+                <div class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h3.5l1.5 3.5-2 1.5a10 10 0 004 4l1.5-2 3.5 1.5V15a1 1 0 01-1 1C5.5 16 2 10 2 4a1 1 0 011-1z"/></svg></div>
+                <div><p class="label">PHONE</p><p class="value">+30 XXX XXX XXXX</p></div>
+              </a>
+              <a href="https://wa.me/30000000000" class="contact-card">
+                <div class="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2a7 7 0 016.07 10.48L16 16l-3.52-.93A7 7 0 119 2z"/></svg></div>
+                <div><p class="label">WHATSAPP</p><p class="value">+30 XXX XXX XXXX</p></div>
+              </a>
+            </div>
+            <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--border);">
+              <p class="eyebrow" style="margin-bottom:12px;">NAVIGATION</p>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <a href="private-label.html" style="font-size:11px;letter-spacing:0.15em;color:var(--muted);transition:opacity 0.2s;">Private Label →</a>
+                <a href="our-brand.html" style="font-size:11px;letter-spacing:0.15em;color:var(--muted);transition:opacity 0.2s;">Our Brand →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: FORM -->
+          <div>
+            <div class="mb-10">
+              <p class="eyebrow">REQUEST A QUOTE</p>
+              <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.15;letter-spacing:-0.02em;margin-bottom:12px;">Tell us what you need.</h2>
+              <p class="body-text">Tell us a little about your business and what you are looking for. We will contact you to discuss the right product and supply options.</p>
+            </div>
+
+            <!-- Success state -->
+            <div id="quoteSuccess" class="form-success" style="display:none;">
+              <p class="eyebrow">ENQUIRY RECEIVED</p>
+              <h3 style="font-family:var(--serif);font-size:2rem;letter-spacing:-0.015em;margin-bottom:12px;">Thank you.</h3>
+              <p class="body-text" style="max-width:384px;margin:0 auto;">We have received your enquiry and will review it shortly. Our team will get back to you to discuss the next steps.</p>
+            </div>
+
+            <!-- Form -->
+            <div id="quoteFormWrap">
+              <form id="quoteForm" style="display:flex;flex-direction:column;gap:24px;">
+                <!-- Contact details -->
+                <div>
+                  <p class="form-section-label">CONTACT DETAILS</p>
+                  <div class="form-grid">
+                    <div class="field"><label>Name <span class="req">*</span></label><input type="text" placeholder="Your full name" required></div>
+                    <div class="field"><label>Company <span class="req">*</span></label><input type="text" placeholder="Company name" required></div>
+                    <div class="field"><label>Business Type <span class="req">*</span></label>
+                      <select required>
+                        <option value="" disabled selected>Select business type</option>
+                        <option>Distributor</option><option>Wholesaler</option><option>Retailer</option><option>Food Service</option><option>Importer</option><option>Other</option>
+                      </select>
+                    </div>
+                    <div class="field"><label>Country / Market <span class="req">*</span></label><input type="text" placeholder="e.g. Greece, Germany, UAE" required><p class="helper">Where will the products be sold?</p></div>
+                    <div class="field"><label>Email <span class="req">*</span></label><input type="email" placeholder="your@company.com" required></div>
+                    <div class="field"><label>Phone / WhatsApp</label><input type="tel" placeholder="+30 XXX XXX XXXX"></div>
+                  </div>
+                </div>
+
+                <!-- Business requirements -->
+                <div>
+                  <p class="form-section-label">BUSINESS REQUIREMENTS</p>
+                  <div style="display:flex;flex-direction:column;gap:24px;">
+                    <div class="field">
+                      <label>Interested in</label>
+                      <div class="interest-toggles">
+                        <button type="button" class="interest-btn">Private Label</button>
+                        <button type="button" class="interest-btn">Our Brand</button>
+                        <button type="button" class="interest-btn">Both</button>
+                        <button type="button" class="interest-btn">Not sure yet</button>
+                      </div>
+                    </div>
+                    <div class="field"><label>Estimated Monthly Volume (kg)</label><input type="text" placeholder="e.g. 500 kg / month"><p class="helper">If known</p></div>
+                    <div class="field"><label>Tell us about your requirements</label><textarea placeholder="Tell us about your business, market, product requirements or anything else you would like to discuss."></textarea><p class="helper">Tell us anything that may help us understand what you are looking for.</p></div>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px;">
+                  <button type="submit" class="btn btn-dark" style="padding:16px 32px;">REQUEST A QUOTE</button>
+                  <p class="body-text" style="font-size:0.8rem;">We will review your enquiry and get back to you to discuss the next steps.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. REQUEST A CALL BANNER -->
+    <section style="background-color:var(--ivory-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 0;">
+      <div class="container">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;">
+          <div>
+            <h3 class="heading-sm" style="margin-bottom:6px;">Prefer to talk first?</h3>
+            <p class="body-text" style="max-width:440px;">If you would rather discuss your requirements directly, request a call from our team.</p>
+          </div>
+          <button onclick="openCallModal()" class="btn btn-outline-dark" style="flex-shrink:0;padding:14px 28px;">REQUEST A CALL →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. FAQ -->
+    <section class="section-ivory">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-sidebar">
+            <p class="eyebrow">FAQ</p>
+            <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px;">Common questions.</h2>
+            <p class="body-text mb-8">Have another question? Get in touch and we will be happy to discuss it.</p>
+            <button onclick="scrollToForm()" class="link-underline">CONTACT US →</button>
+          </div>
+          <div>
+            <div class="faq-item">
+              <button class="faq-question">What is the minimum order quantity?<svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3 9h12" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+              <div class="faq-answer"><p>Minimum order quantities vary depending on the product and format. Contact us with your requirements and we will advise the most suitable options for your business.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question">Can I use my own brand?<svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3 9h12" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+              <div class="faq-answer"><p>Yes. Our Private Label service allows you to apply your own branding to our ready chocolate products through a professional label. You choose the product — we take care of the labeling and preparation.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question">Which products and flavours are available?<svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3 9h12" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+              <div class="faq-answer"><p>We offer a range of chocolate flavours including Classic Dark, Hazelnut, Strawberry, Milk Chocolate and more. Request our full product catalogue for the complete listing.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question">Can I request samples?<svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3 9h12" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+              <div class="faq-answer"><p>Sample availability depends on product and order context. Please include a request in your enquiry and we will discuss the options with you.</p></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question">Which markets do you supply?<svg class="faq-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v12M3 9h12" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/></svg></button>
+              <div class="faq-answer"><p>We work with distributors and professional buyers across multiple markets. Contact us with your location and requirements to discuss supply options for your region.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. FINAL CTA -->
+    <section class="section-deep cta-section">
+      <div class="container">
+        <p class="eyebrow">GET STARTED</p>
+        <h2 class="heading-xl" style="color:var(--text-light);max-width:680px;margin:0 auto 24px;">Ready to discuss your next<br><span class="italic text-gold">chocolate product?</span></h2>
+        <p class="body-text-light" style="max-width:448px;margin:0 auto 48px;">Tell us what you are looking for and let's explore the right solution for your market.</p>
+        <div class="cta-buttons">
+          <button onclick="scrollToForm()" class="btn btn-gold-solid">REQUEST A QUOTE →</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="logo mb-4"><span class="logo-private" style="color:var(--text-light);font-size:22px;">Private</span><span class="logo-chocolate" style="font-size:11px;">CHOCOLATE</span></div><p>Private Label &amp; Chocolate Distribution Partner</p></div>
+        <div><p class="footer-nav-label">NAVIGATION</p><ul class="footer-nav-list"><li><a href="index.html">HOME</a></li><li><a href="private-label.html">PRIVATE LABEL</a></li><li><a href="our-brand.html">OUR BRAND</a></li><li><a href="contact.html">CONTACT</a></li></ul></div>
+        <div><p class="footer-contact-label">CONTACT</p><div class="footer-contact-list"><a href="mailto:info@privatechocolate.com">info@privatechocolate.com</a><a href="tel:+30000000000">+30 000 000 0000</a></div></div>
+      </div>
+      <hr class="divider-light">
+      <div class="footer-bottom"><p>© 2026 Private Chocolate. All rights reserved.</p><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div></div>
+    </div>
+  </footer>
+
+  <script src="js/svg.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
