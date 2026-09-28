@@ -1073,7 +1073,7 @@ html, body { overflow-x: hidden; }
 
 /* 2. Mobile hero: stronger gradient so text is readable over portrait product image */
 @media (max-width: 767px) {
-  .hero { min-height: 100svh; }
+  .hero { min-height: 100svh; align-items: flex-start; }
   .hero-img { object-position: 65% center; }
   /* !important needed to override inline gradient styles on private-label & our-brand pages */
   .hero-gradient-h {
