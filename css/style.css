@@ -297,7 +297,7 @@ ul, ol { list-style: none; }
 .hero-gradient-h {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--dark) 22%, rgba(20,18,16,0.82) 40%, rgba(20,18,16,0.35) 62%, rgba(20,18,16,0.1) 80%, transparent 100%);
+  background: linear-gradient(to right, rgba(20,18,16,0.85) 15%, rgba(20,18,16,0.5) 35%, rgba(20,18,16,0.15) 55%, transparent 70%);
 }
 .hero-gradient-v {
   position: absolute;
