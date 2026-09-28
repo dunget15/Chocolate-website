@@ -288,18 +288,16 @@ ul, ol { list-style: none; }
 }
 .hero-img {
   position: absolute;
-  right: 0;
-  top: 0;
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: left;
-  width: 65%;
-  min-width: 600px;
+  object-position: center;
 }
 .hero-gradient-h {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--dark) 30%, rgba(20,18,16,0.85) 52%, rgba(20,18,16,0.2) 70%, transparent 100%);
+  background: linear-gradient(to right, var(--dark) 22%, rgba(20,18,16,0.82) 40%, rgba(20,18,16,0.35) 62%, rgba(20,18,16,0.1) 80%, transparent 100%);
 }
 .hero-gradient-v {
   position: absolute;
