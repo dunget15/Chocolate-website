@@ -1,20 +1,19 @@
 /**
  * Private Chocolate — Analytics & Consent
  * ────────────────────────────────────────
- * Single file: Consent Mode v2 → gtag.js → GA4 + Google Ads + reCAPTCHA v3
+ * Consent Mode v2 → gtag.js → GA4 + Google Ads
  *
- * CONFIGURATION — change these when you have real IDs:
+ * CONFIGURATION:
  */
 var PC_CONFIG = {
-  GA4_ID:             'G-XXXXXXXXXX',
-  GADS_ID:            'AW-XXXXXXXXXX',
-  GADS_CONV_LABEL:    'CONVERSION_LABEL',
-  RECAPTCHA_SITEKEY:  'RECAPTCHA_SITE_KEY',
-  SHEETS_URL:         'GOOGLE_APPS_SCRIPT_URL',
+  GA4_ID:          'G-XXXXXXXXXX',
+  GADS_ID:         'AW-XXXXXXXXXX',
+  GADS_CONV_LABEL: 'CONVERSION_LABEL',
+  SHEETS_URL:      'GOOGLE_APPS_SCRIPT_URL',
 };
 
 /* ═══════════════════════════════════════════
-   1. CONSENT MODE v2 — runs BEFORE gtag loads
+   1. CONSENT MODE v2
    ═══════════════════════════════════════════ */
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -27,7 +26,6 @@ gtag('consent', 'default', {
   wait_for_update:      500
 });
 
-// Restore saved consent
 (function(){
   var saved = null;
   try { saved = localStorage.getItem('pc_consent'); } catch(e){}
@@ -41,7 +39,6 @@ function _grantConsent() {
     ad_user_data:       'granted',
     ad_personalization: 'granted'
   });
-  _loadRecaptcha();
 }
 
 function _denyConsent() {
@@ -54,7 +51,7 @@ function _denyConsent() {
 }
 
 /* ═══════════════════════════════════════════
-   2. LOAD GTAG.JS — single tag, async
+   2. LOAD GTAG.JS
    ═══════════════════════════════════════════ */
 (function(){
   var s = document.createElement('script');
@@ -68,90 +65,91 @@ gtag('config', PC_CONFIG.GA4_ID, { send_page_view: true });
 gtag('config', PC_CONFIG.GADS_ID);
 
 /* ═══════════════════════════════════════════
-   3. reCAPTCHA v3 — loads ONLY after consent
-   ═══════════════════════════════════════════ */
-var _recaptchaReady = false;
-
-function _loadRecaptcha() {
-  if (_recaptchaReady) return;
-  if (PC_CONFIG.RECAPTCHA_SITEKEY === 'RECAPTCHA_SITE_KEY') return;
-  // Only load on pages with forms
-  if (!document.getElementById('quoteForm') && !document.getElementById('callForm')) return;
-
-  var s = document.createElement('script');
-  s.src = 'https://www.google.com/recaptcha/api.js?render=' + PC_CONFIG.RECAPTCHA_SITEKEY;
-  s.async = true;
-  s.onload = function(){ _recaptchaReady = true; };
-  document.head.appendChild(s);
-}
-
-function _getRecaptchaToken(action, callback) {
-  if (!_recaptchaReady || typeof grecaptcha === 'undefined') {
-    callback(''); // No token — form still works, server decides
-    return;
-  }
-  grecaptcha.ready(function(){
-    grecaptcha.execute(PC_CONFIG.RECAPTCHA_SITEKEY, { action: action })
-      .then(function(token){ callback(token); })
-      .catch(function(){ callback(''); });
-  });
-}
-
-/* ═══════════════════════════════════════════
-   4. COOKIE CONSENT BANNER
+   3. COOKIE CONSENT — blocking overlay
    ═══════════════════════════════════════════ */
 function _buildBanner() {
   try { if (localStorage.getItem('pc_consent')) return; } catch(e){}
 
   var isGR = document.documentElement.lang === 'el';
-  var banner = document.createElement('div');
-  banner.id = 'cookieBanner';
-  banner.className = 'cookie-banner';
-  banner.innerHTML =
-    '<div class="cookie-inner">' +
-      '<p class="cookie-text">' +
+
+  var overlay = document.createElement('div');
+  overlay.id = 'cookieOverlay';
+  overlay.className = 'cookie-overlay';
+
+  overlay.innerHTML =
+    '<div class="cookie-box">' +
+      '<div class="cookie-header">' +
+        '<span class="cookie-title">' + (isGR ? 'Ρυθμίσεις Cookies' : 'Cookie Settings') + '</span>' +
+      '</div>' +
+      '<p class="cookie-desc">' +
         (isGR
-          ? 'Χρησιμοποιούμε cookies για analytics και διαφημίσεις. '
-          : 'We use cookies for analytics and advertising. ') +
-        '<a href="' + (isGR ? 'privacy.html' : 'privacy.html') + '" class="cookie-link">' +
-          (isGR ? 'Πολιτική Απορρήτου' : 'Privacy Policy') +
-        '</a>' +
+          ? 'Χρησιμοποιούμε cookies για τη λειτουργία του ιστοτόπου, τη μέτρηση επισκεψιμότητας και τη βελτίωση της εμπειρίας σας.'
+          : 'We use cookies to operate the site, measure traffic and improve your experience.') +
       '</p>' +
-      '<div class="cookie-buttons">' +
+
+      // Necessary — always on
+      '<div class="cookie-category">' +
+        '<div class="cookie-cat-header">' +
+          '<span class="cookie-cat-name">' + (isGR ? 'Απαραίτητα' : 'Necessary') + '</span>' +
+          '<span class="cookie-cat-badge">' + (isGR ? 'Πάντα ενεργά' : 'Always active') + '</span>' +
+        '</div>' +
+        '<p class="cookie-cat-desc">' +
+          (isGR
+            ? 'Βασικά cookies για τη λειτουργία του ιστοτόπου, τη φόρμα επικοινωνίας και την αποθήκευση των προτιμήσεών σας.'
+            : 'Essential cookies for site functionality, the contact form and storing your preferences.') +
+        '</p>' +
+      '</div>' +
+
+      // Analytics & Ads — optional
+      '<div class="cookie-category">' +
+        '<div class="cookie-cat-header">' +
+          '<span class="cookie-cat-name">' + (isGR ? 'Analytics & Διαφημίσεις' : 'Analytics & Advertising') + '</span>' +
+        '</div>' +
+        '<p class="cookie-cat-desc">' +
+          (isGR
+            ? 'Google Analytics για μέτρηση επισκεψιμότητας και Google Ads για μέτρηση αποτελεσματικότητας διαφημίσεων. Δεν συλλέγουμε προσωπικά δεδομένα.'
+            : 'Google Analytics for traffic measurement and Google Ads for advertising performance. We do not collect personal data.') +
+        '</p>' +
+      '</div>' +
+
+      '<div class="cookie-actions">' +
         '<button id="cookieReject" class="cookie-btn cookie-btn-reject">' +
-          (isGR ? 'Απόρριψη' : 'Reject') +
+          (isGR ? 'Μόνο Απαραίτητα' : 'Necessary Only') +
         '</button>' +
         '<button id="cookieAccept" class="cookie-btn cookie-btn-accept">' +
-          (isGR ? 'Αποδοχή' : 'Accept') +
+          (isGR ? 'Αποδοχή Όλων' : 'Accept All') +
         '</button>' +
       '</div>' +
+
+      '<a href="' + (isGR ? 'privacy.html' : 'privacy.html') + '" class="cookie-privacy-link">' +
+        (isGR ? 'Πολιτική Απορρήτου' : 'Privacy Policy') +
+      '</a>' +
     '</div>';
 
-  document.body.appendChild(banner);
-  setTimeout(function(){ banner.classList.add('cookie-banner-show'); }, 300);
+  document.body.appendChild(overlay);
+  setTimeout(function(){ overlay.classList.add('cookie-overlay-show'); }, 100);
 
   document.getElementById('cookieAccept').addEventListener('click', function(){
     _grantConsent();
     try { localStorage.setItem('pc_consent', 'granted'); } catch(e){}
-    _hideBanner();
+    _hideOverlay();
   });
 
   document.getElementById('cookieReject').addEventListener('click', function(){
     _denyConsent();
     try { localStorage.setItem('pc_consent', 'denied'); } catch(e){}
-    _hideBanner();
+    _hideOverlay();
   });
 }
 
-function _hideBanner() {
-  var b = document.getElementById('cookieBanner');
-  if (b) {
-    b.classList.remove('cookie-banner-show');
-    setTimeout(function(){ b.remove(); }, 300);
+function _hideOverlay() {
+  var o = document.getElementById('cookieOverlay');
+  if (o) {
+    o.classList.remove('cookie-overlay-show');
+    setTimeout(function(){ o.remove(); }, 300);
   }
 }
 
-// Public: reopen consent
 window.pcReopenConsent = function() {
   try { localStorage.removeItem('pc_consent'); } catch(e){}
   _buildBanner();
@@ -160,7 +158,7 @@ window.pcReopenConsent = function() {
 document.addEventListener('DOMContentLoaded', _buildBanner);
 
 /* ═══════════════════════════════════════════
-   5. EVENT TRACKING
+   4. EVENT TRACKING
    ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -169,26 +167,22 @@ document.addEventListener('DOMContentLoaded', function(){
   if (quoteForm) {
     quoteForm.addEventListener('submit', function(e){
       e.preventDefault();
-      _getRecaptchaToken('quote_form', function(token){
-        _trackLead('quote_form');
-        _submitToSheets(quoteForm, 'quote', token);
-      });
+      _trackLead('quote_form');
+      _submitToSheets(quoteForm, 'quote');
     });
   }
 
-  // ── Call request modal form ──
+  // ── Call request modal ──
   var callForm = document.getElementById('callForm');
   if (callForm) {
     callForm.addEventListener('submit', function(e){
       e.preventDefault();
-      _getRecaptchaToken('call_request', function(token){
-        _trackLead('call_request');
-        _submitToSheets(callForm, 'call', token);
-        var inner = document.getElementById('callFormInner');
-        var success = document.getElementById('callSuccess');
-        if (inner) inner.style.display = 'none';
-        if (success) success.style.display = 'block';
-      });
+      _trackLead('call_request');
+      _submitToSheets(callForm, 'call');
+      var inner = document.getElementById('callFormInner');
+      var success = document.getElementById('callSuccess');
+      if (inner) inner.style.display = 'none';
+      if (success) success.style.display = 'block';
     });
   }
 
@@ -227,20 +221,23 @@ function _trackLead(formName) {
 }
 
 /* ═══════════════════════════════════════════
-   6. GOOGLE SHEETS SUBMISSION
+   5. GOOGLE SHEETS SUBMISSION
    ═══════════════════════════════════════════ */
-function _submitToSheets(form, formType, recaptchaToken) {
+function _submitToSheets(form, formType) {
+  // Honeypot check
+  var hp = form.querySelector('.hp-field input');
+  if (hp && hp.value) return;
+
   var data = new FormData(form);
   data.append('form_type', formType);
   data.append('page_lang', document.documentElement.lang || 'el');
   data.append('timestamp', new Date().toISOString());
-  if (recaptchaToken) data.append('recaptcha_token', recaptchaToken);
 
   if (PC_CONFIG.SHEETS_URL && PC_CONFIG.SHEETS_URL !== 'GOOGLE_APPS_SCRIPT_URL') {
     fetch(PC_CONFIG.SHEETS_URL, { method: 'POST', body: data }).catch(function(){});
   }
 
-  // Show success UI (quote form)
+  // Show success UI
   if (formType === 'quote') {
     var wrap = document.getElementById('quoteFormWrap');
     var success = document.getElementById('quoteSuccess');

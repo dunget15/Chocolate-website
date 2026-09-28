@@ -7,7 +7,7 @@
   <link rel="icon" href="../img/favicon.ico" sizes="32x32">
   <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
-  <meta name="description" content="Create chocolate products under your own brand. Private label and chocolate distribution for professionals — flexible packaging, 16+ flavours.">
+  <meta name="description" content="Private label chocolate and chocolate distribution for professionals. Classic, Bitter, White and flavoured options, custom recipes and flexible packaging formats.">
   <link rel="canonical" href="https://privatechocolate.com/en/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Private Chocolate — Your Brand. Our Chocolate.">
@@ -66,7 +66,11 @@
     <!-- 1. HERO -->
     <section class="hero">
       <div class="hero-bg">
-        <img src="../img/hero.png" alt="Private Chocolate — matte black 1kg pouches with branded labels" class="hero-img">
+        <picture>
+          <source media="(max-width: 767px)" srcset="../img/hero-home-mobile.webp" type="image/webp">
+          <source srcset="../img/hero-home.webp" type="image/webp">
+          <img src="../img/hero-home.webp" alt="Private Chocolate — matte black packaging with branded labels" class="hero-img">
+        </picture>
         <div class="hero-gradient-h"></div>
         <div class="hero-gradient-v"></div>
       </div>
@@ -74,7 +78,7 @@
         <div class="hero-text">
           <p class="eyebrow">PRIVATE LABEL CHOCOLATE</p>
           <h1><span class="line1">Your Brand.</span><span class="line2">Our Chocolate.</span></h1>
-          <p class="hero-desc">Create chocolate products under your own brand, with flexible packaging options and ready-to-use recipes for your business.</p>
+          <p class="hero-desc">Create chocolate products under your own brand, with flexible packaging options, ready recipes and the flexibility to adapt the product to your market.</p>
           <div class="hero-buttons">
             <a href="contact.html" class="btn btn-gold">REQUEST A QUOTE <span>→</span></a>
             <a href="private-label.html" class="btn btn-ghost">EXPLORE OUR PRODUCTS</a>
@@ -110,7 +114,7 @@
     <section style="background-color:var(--dark);">
       <div class="container" style="padding-top:80px;padding-bottom:56px;">
         <p class="eyebrow">TWO WAYS TO WORK TOGETHER</p>
-        <h2 class="heading-md" style="color:var(--text-light);max-width:560px;">Choose the approach that fits<br><span class="italic text-ivory-warm">your business.</span></h2>
+        <h2 class="heading-md" style="color:var(--text-light);max-width:560px;">Flexible quantities, formats and packaging options suited to different distribution needs.</h2>
       </div>
       <div class="split-section">
         <div class="split-card" style="background-color:#1A1612;border-top:1px solid rgba(196,154,74,0.12);">
@@ -118,7 +122,7 @@
           <div>
             <span class="split-badge" style="border:1px solid var(--gold);color:var(--gold);background-color:var(--gold-muted);">PRIVATE LABEL</span>
             <h3 class="heading-md" style="color:var(--text-light);margin-bottom:20px;">Your brand.<br><span class="italic text-gold">Our chocolate.</span></h3>
-            <p class="body-text-light" style="max-width:440px;margin-bottom:40px;">Create chocolate products with your own commercial identity, choosing the product, packaging and quantity that suits your business.</p>
+            <p class="body-text-light" style="max-width:440px;margin-bottom:40px;">Your brand identity on the product, with ready recipe options or a recipe tailored to your requirements.</p>
           </div>
           <a href="private-label.html" class="btn btn-gold" style="align-self:flex-start;">Discover Private Label →</a>
         </div>
@@ -143,27 +147,17 @@
           <p class="body-text max-w-lg">Different flavours, custom recipes and flexible packaging options, designed for the needs of your business.</p>
         </div>
         <div class="stats-row mb-16">
-          <div class="stat-item"><div class="stat-value"><span class="gold">16+</span> Flavours</div><p class="stat-sub">Available flavours</p></div>
+          <div class="stat-item"><div class="stat-value"><span class="gold">OUR</span> Chocolate Range</div><p class="stat-sub">Classic · Bitter · White</p></div>
           <div class="stat-item"><div class="stat-value"><span class="gold">Custom</span> Recipes</div><p class="stat-sub">Recipe customisation</p></div>
-          <div class="stat-item"><div class="stat-value"><span class="gold">Flexible</span> Packaging</div><p class="stat-sub">Multiple packaging options</p></div>
+          <div class="stat-item"><div class="stat-value"><span class="gold">Flexible</span> Formats</div><p class="stat-sub">500g · 1kg · 2kg · Cylinder 1kg</p></div>
         </div>
-        <div class="pouch-showcase">
-          <div class="radial-bg"></div>
-          <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:48px 24px 0;">
-            <div class="pouch-row">
-              <div class="pouch-item pouch-left"><div data-pouch="HAZELNUT" data-pouch-id="hazelnut-h"></div><div class="pouch-accent pouch-accent-left" style="background-color:#2A1E14;"><img src="https://images.unsplash.com/photo-1601275874186-86dea41a4b7f?w=80&h=80&fit=crop&auto=format" alt="Hazelnuts"></div></div>
-              <div class="pouch-item pouch-center"><div data-pouch="BARISTA BLEND" data-pouch-id="barista-h" data-label-bg="#F5F0E8" data-label-text="#1C1714" data-label-sub="#8B7D70"></div></div>
-              <div class="pouch-item pouch-right"><div data-pouch="STRAWBERRY" data-pouch-id="strawberry-h"></div><div class="pouch-accent pouch-accent-right" style="background-color:#1A0F0F;"><img src="https://images.unsplash.com/photo-1686554397800-d49f9f690ff5?w=80&h=80&fit=crop&auto=format" alt="Strawberry"></div></div>
-            </div>
-            <div class="flavour-bar">
-              <span class="flavour-label">HAZELNUT</span><span class="flavour-label">BARISTA BLEND</span><span class="flavour-label">STRAWBERRY</span><span class="flavour-label highlight">+ 13 MORE FLAVOURS</span>
-            </div>
-          </div>
+        <div class="pouch-showcase" style="border-radius:12px;overflow:hidden;">
+          <img src="../img/products-lineup.webp" alt="Private Chocolate — chocolate product range" style="width:100%;display:block;">
         </div>
       </div>
     </section>
 
-    <!-- 5. WHO WE WORK WITH -->
+    <!-- HIDDEN: Who We Work With
     <section class="section-ivory-warm" style="border-top:1px solid var(--border);padding:64px 0;">
       <div class="container">
         <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;">
@@ -177,6 +171,7 @@
         </div>
       </div>
     </section>
+    -->
 
     <!-- 6. QUALITY & TRACEABILITY -->
     <section class="section-dark">
@@ -190,15 +185,15 @@
           <div>
             <div class="quality-item">
               <div class="icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16c0 0 1-8 8-10s6 6 6 6-4-1-8 2S4 16 4 16z"/><path d="M4 16l4-4"/></svg></div>
-              <div><h4>Selected Products</h4><p>Chocolates from reliable sources, selected for consistent quality and professional use.</p></div>
+              <div><h4>Selected Products</h4><p>Selected products — Chocolate products for professional use, with a focus on consistency and reliability.</p></div>
             </div>
             <div class="quality-item">
               <div class="icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L4 5v5c0 4 3 7 6 8 3-1 6-4 6-8V5l-6-3z"/><path d="M7 10l2 2 4-4"/></svg></div>
-              <div><h4>Traceability & Compliance</h4><p>Full documentation and product traceability for the requirements of the professional sector.</p></div>
+              <div><h4>Traceability & Compliance</h4><p>Required documentation and traceability information can be organised according to the needs of the partnership.</p></div>
             </div>
             <div class="quality-item">
               <div class="icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4h11v9H1zM12 7h3l3 3v3h-6V7z"/><circle cx="4.5" cy="14.5" r="1.5"/><circle cx="15.5" cy="14.5" r="1.5"/></svg></div>
-              <div><h4>Reliable Supply</h4><p>Consistent availability and dependable service for businesses of every size.</p></div>
+              <div><h4>Reliable Supply</h4><p>Practical, consistent service for professional distribution needs.</p></div>
             </div>
             <div class="certs">
               <p class="certs-label">CERTIFICATIONS — COMING SOON</p>

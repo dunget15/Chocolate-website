@@ -2,44 +2,26 @@
  * Private Chocolate — Google Apps Script
  * ──────────────────────────────────────
  * SETUP:
- * 1. Create a Google Sheet with headers in Row 1:
- *    Timestamp | Form | Name | Company | Email | Phone | Business Type | Country | Interest | Volume | Message | Language | reCAPTCHA Score
- * 2. Extensions → Apps Script → paste this → Deploy → Web app → "Anyone"
- * 3. Copy URL → paste in analytics.js SHEETS_URL
- *
- * CHANGE THESE:
+ * 1. Create Google Sheet → Row 1 headers:
+ *    Timestamp | Form | Name | Company | Email | Phone | Business Type | Country | Interest | Volume | Message | Language
+ * 2. Extensions → Apps Script → paste this
+ * 3. Deploy → New deployment → Web app → "Anyone"
+ * 4. Copy URL → paste in analytics.js SHEETS_URL
  */
 var NOTIFY_EMAIL = 'info@privatechocolate.com';
-var RECAPTCHA_SECRET = 'YOUR_RECAPTCHA_SECRET_KEY';
-var SCORE_THRESHOLD = 0.5;
 var SHEET_NAME = 'Submissions';
 
 function doPost(e) {
   try {
     var p = e.parameter;
 
-    // ── Verify reCAPTCHA ──
-    var score = -1;
-    if (p.recaptcha_token && RECAPTCHA_SECRET !== 'YOUR_RECAPTCHA_SECRET_KEY') {
-      var resp = UrlFetchApp.fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'post',
-        payload: {
-          secret: RECAPTCHA_SECRET,
-          response: p.recaptcha_token
-        }
-      });
-      var result = JSON.parse(resp.getContentText());
-      score = result.score || 0;
-
-      // Block likely bots
-      if (!result.success || score < SCORE_THRESHOLD) {
-        return ContentService.createTextOutput(
-          JSON.stringify({ status: 'blocked', score: score })
-        ).setMimeType(ContentService.MimeType.JSON);
-      }
+    // Honeypot check — if "website" field is filled, it's a bot
+    if (p.website && p.website.length > 0) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ status: 'blocked' })
+      ).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // ── Write to Sheet ──
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME)
       || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
@@ -55,11 +37,9 @@ function doPost(e) {
       p.interest || '',
       p.volume || '',
       p.message || '',
-      p.page_lang || '',
-      score
+      p.page_lang || ''
     ]);
 
-    // ── Send email ──
     var subject = 'New enquiry from ' + (p.name || 'Website') + ' (' + (p.form_type || 'quote') + ')';
     var body = 'New submission from privatechocolate.com\n\n'
       + 'Type: ' + (p.form_type || '-') + '\n'
@@ -73,13 +53,12 @@ function doPost(e) {
       + 'Volume: ' + (p.volume || '-') + '\n'
       + 'Message: ' + (p.message || '-') + '\n'
       + 'Language: ' + (p.page_lang || '-') + '\n'
-      + 'reCAPTCHA Score: ' + score + '\n'
       + '\nTimestamp: ' + (p.timestamp || new Date().toISOString());
 
     MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
 
     return ContentService.createTextOutput(
-      JSON.stringify({ status: 'ok', score: score })
+      JSON.stringify({ status: 'ok' })
     ).setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
